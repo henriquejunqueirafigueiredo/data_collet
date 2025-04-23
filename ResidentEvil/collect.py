@@ -19,7 +19,7 @@ def get_content(url):
     return resp
 
 
-def get_infos(soup):
+def get_infos(soup) -> dict:
     div_page = soup.find('div', class_= 'td-page-content')
     paragrafo = div_page.find_all("p")[1]
     em = paragrafo.find_all('em')
@@ -30,7 +30,7 @@ def get_infos(soup):
     return data
 
 
-def get_aparicoes(soup):
+def get_aparicoes(soup) -> list:
     lis = (soup.find('div', class_= 'td-page-content')
            .find('h4')
            .find_next()
@@ -39,7 +39,7 @@ def get_aparicoes(soup):
     return aparicoes
 
 
-def get_data(url):
+def get_data(url)-> dict:
     response = get_content(url)
 
     if response.status_code != 200 :
@@ -52,7 +52,7 @@ def get_data(url):
     return data
 
 
-def get_links():
+def get_links()->list:
     url_2 = 'https://www.residentevildatabase.com/personagens/'
     resp = requests.get(url_2, headers=headers)
     soup_personagens = BeautifulSoup(resp.text)
